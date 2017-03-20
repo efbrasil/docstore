@@ -5,11 +5,12 @@ import hashlib
 import shutil
 import time
 
-# app = Flask(__name__)
+app = Flask(__name__)
 
-# @app.route('/')
-# def hello_world():
-#     return 'Hello World!'
+@app.route('/get_all_docs')
+def get_all_docs():
+    
+    return 'Hello World!'
 
 config = {}
 docs = {}
@@ -80,13 +81,19 @@ def ds_config():
     config['db_filename'] = 'docs.db'
     config['docs_root'] = './docs'
     config['docs_src'] = './src'
+    config['db'] = sqlite3.connect[config['db_filename']]
+
+def ds_exit():
+    config['db'].close()
 
 if __name__ == '__main__':
     ds_config()
-    df_create_db(config['db_filename'],
-                 config['docs_root'],
-                 config['docs_src'])
+    # df_create_db(config['db_filename'],
+    #              config['docs_root'],
+    #              config['docs_src'])
     
     # ds_read_db(config['db_filename'])
     
-    # app.run()
+    app.run()
+    ds_exit()
+    
